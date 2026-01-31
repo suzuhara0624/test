@@ -8,9 +8,41 @@
       font-family: Arial, sans-serif;
       margin: 20px;
     }
-    #player {
+
+    #player-container {
+      position: relative;
+      width: 761px;
+      height: 428px;
       margin-bottom: 20px;
     }
+
+    .side-controls {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .side-controls button {
+      width: 48px;
+      height: 48px;
+      font-size: 24px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      opacity: 0.75;
+    }
+
+    .side-controls button:active {
+      opacity: 1;
+      transform: scale(0.95);
+    }
+
     input {
       width: 300px;
       margin-right: 10px;
@@ -19,8 +51,17 @@
 </head>
 <body>
 
-  <div id="player"></div>
+  <!-- PLAYER AREA (this is what we replaced) -->
+  <div id="player-container">
+    <div id="player"></div>
 
+    <div class="side-controls">
+      <button onclick="seekBy(-5)">&lt;</button>
+      <button onclick="seekBy(5)">&gt;</button>
+    </div>
+  </div>
+
+  <!-- CONTROLS BELOW VIDEO -->
   <div>
     <div>
       <input id="timeInput" placeholder="HH:mm:ss (e.g. 01:23:45)" />

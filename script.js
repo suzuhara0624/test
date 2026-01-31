@@ -86,84 +86,18 @@ function unlockOrientation() {
 
 document.addEventListener("fullscreenchange", () => {
   document.fullscreenElement ? requestLandscape() : unlockOrientation();
-});
+})
 
-// ================= Gestures =================
-const playerEl = document.getElementById("player");
 
-let tapCount = 0;
-let tapTimer = null;
-let longPressTimer = null;
-let startX = 0;
-let startY = 0;
-let startTime = 0;
 
-// Touch start
-playerEl.addEventListener("touchstart", (e) => {
+// ==== something new ====
+function seekBy(seconds) {
   if (!player) return;
 
-  const t = e.touches[0];
-  startX = t.clientX;
-  startY = t.clientY;
-  startTime = player.getCurrentTime();
+  const current = player.getCurrentTime();
+  const target = Math.max(0, current + seconds);
+  player.seekTo(target, true);
+}
 
-  longPressTimer = setTimeout(() => {
-    player.setPlaybackRate(2);
-  }, 500);
-});
 
-// Touch end
-playerEl.addEventListener("touchend", (e) => {
-  if (!player) return;
-
-  clearTimeout(longPressTimer);
-  player.setPlaybackRate(1);
-
-  tapCount++;
-
-  if (!tapTimer) {
-    tapTimer = setTimeout(() => {
-      const touch = e.changedTouches[0];
-      const screenW = window.innerWidth;
-      const current = player.getCurrentTime();
-
-      if (tapCount === 2) {
-        // Double tap ±5s
-        touch.clientX < screenW / 2
-          ? player.seekTo(Math.max(0, current - 5), true)
-          : player.seekTo(current + 5, true);
-      }
-
-      if (tapCount === 3) {
-        // Triple tap ±30s
-        touch.clientX < screenW / 2
-          ? player.seekTo(Math.max(0, current - 30), true)
-          : player.seekTo(current + 30, true);
-      }
-
-      tapCount = 0;
-      tapTimer = null;
-    }, 300);
-  }
-});
-
-// Swipe handling
-playerEl.addEventListener("touchmove", (e) => {
-  if (!player) return;
-
-  const t = e.touches[0];
-  const dx = t.clientX - startX;
-  const dy = t.clientY - startY;
-
-  // Horizontal swipe → seek
-  if (Math.abs(dx) > Math.abs(dy)) {
-    player.seekTo(startTime + dx / 10, true);
-  }
-
-  // Vertical swipe → volume
-  if (Math.abs(dy) > Math.abs(dx)) {
-    const vol = player.getVolume();
-    const newVol = Math.min(100, Math.max(0, vol - dy / 5));
-    player.setVolume(newVol);
-  }
-});
+;
