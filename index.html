@@ -9,12 +9,21 @@
       margin: 20px;
     }
 
+
     #player-container {
       position: relative;
-      width: 761px;
+      width: 999px;
       height: 428px;
       margin-bottom: 20px;
     }
+
+.controls {
+width: 400px;
+  height: 200px; 
+ position: absolute;   /* 👈 REQUIRED */
+  top: 70%;            /* move down */
+  left: 20px;           /* move right */     
+}
 
     .side-controls {
       position: absolute;
@@ -51,18 +60,20 @@
 </head>
 <body>
 
-  <!-- PLAYER AREA (this is what we replaced) -->
+  <!-- PLAYER AREA  -->
   <div id="player-container">
     <div id="player"></div>
 
     <div class="side-controls">
       <button onclick="seekBy(-5)">&lt;</button>
       <button onclick="seekBy(5)">&gt;</button>
+<button onclick="togglePageFullscreen()">⛶</button>
+
     </div>
   </div>
 
   <!-- CONTROLS BELOW VIDEO -->
-  <div>
+  <div class="controls">
     <div>
       <input id="timeInput" placeholder="HH:mm:ss (e.g. 01:23:45)" />
       <button onclick="jumpTime()">Jump Time</button>

@@ -13,8 +13,8 @@ function onYouTubeIframeAPIReady() {
   const timeParam = getQueryParam("t");
 
   player = new YT.Player("player", {
-    height: "428",
-    width: "761",
+    height: "540",
+    width: "999",
     videoId: videoId,
     playerVars: {
       playsinline: 1
@@ -99,5 +99,15 @@ function seekBy(seconds) {
   player.seekTo(target, true);
 }
 
+// === fullscreen ===
+function togglePageFullscreen() {
+  const container = document.getElementById("player-container");
+
+  if (!document.fullscreenElement) {
+    container.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
 
 ;
