@@ -12,32 +12,26 @@ function onYouTubeIframeAPIReady() {
   const videoId = getQueryParam("v") || DEFAULT_VIDEO_ID;
   const timeParam = getQueryParam("t");
 
-  player = new YT.Player("player", {
-    videoId: videoId,
-    playerVars: {
-      playsinline: 1
-    },
-    events: {
-      onReady: () => {
+ player = new YT.Player("player", {
+  videoId: videoId,
+  playerVars: {
+    playsinline: 1,
+    mute: 1   // 👈 THIS is the key for mobile
+  },
+  events: {
+    onReady: () => {
+      player.setPlaybackQuality('hd720');
 
- // Auto mute
-    player.mute();
-
-// Request 720p
-    player.setPlaybackQuality('hd720');
-
-
- // change timething    
-
-   if (timeParam) {
-          const seconds = parseTime(timeParam);
-          if (seconds !== null) {
-            player.seekTo(seconds, true);
-          }
+      if (timeParam) {
+        const seconds = parseTime(timeParam);
+        if (seconds !== null) {
+          player.seekTo(seconds, true);
         }
       }
     }
-  });
+  }
+});
+
 }
 
 
