@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>YouTube Controller</title>
+  <style>
+
+.version-tag {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 8px;
+  border-radius: 6px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+
+#player-container {
+  position: relative;
+  width: 800px;
+  aspect-ratio: 16 / 9;
+  background: black;
+
+ display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+/* When page fullscreen */
+#player-container:fullscreen {
+  width: 100vw;
+  height: 100vh;
+}
+
+#player iframe {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.controls {
+width: 400px;
+  height: 200px; 
+ position: absolute;   /* 👈 REQUIRED */
+  top: 70%;            /* move down */
+  left: 20px;           /* move right */     
+}
+
+    .side-controls {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .side-controls button {
+      width: 48px;
+      height: 48px;
+      font-size: 24px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      opacity: 0.75;
+    }
+
+    .side-controls button:active {
+      opacity: 1;
+      transform: scale(0.95);
+    }
+
+    input {
+      width: 300px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PLAYER AREA  -->
+  <div id="player-container">
+    <div id="player"></div>
+
+    <div class="side-controls">
+      <button onclick="seekBy(-5)">&lt;</button>
+      <button onclick="seekBy(5)">&gt;</button>
+<button onclick="togglePageFullscreen()">⛶</button>
+
+    </div>
+  </div>
+
+  <!-- CONTROLS BELOW VIDEO -->
+  <div class="controls">
+    <div>
+      <input id="timeInput" placeholder="HH:mm:ss (e.g. 01:23:45)" />
+      <button onclick="jumpTime()">Jump Time</button>
+    </div>
+    <br />
+    <div>
+      <input id="urlInput" placeholder="YouTube URL or ID" />
+      <button onclick="changeVideo()">Change Video</button>
+    </div>
+  </div>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+<div class="version-tag">ver 1.000002</div>
+
+</body>
+</html>
