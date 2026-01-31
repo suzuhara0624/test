@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>YouTube Controller</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #player {
+      margin-bottom: 20px;
+    }
+    input {
+      width: 300px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="player"></div>
+
+  <div>
+    <div>
+      <input id="timeInput" placeholder="HH:mm:ss (e.g. 01:23:45)" />
+      <button onclick="jumpTime()">Jump Time</button>
+    </div>
+    <br />
+    <div>
+      <input id="urlInput" placeholder="YouTube URL or ID" />
+      <button onclick="changeVideo()">Change Video</button>
+    </div>
+  </div>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
