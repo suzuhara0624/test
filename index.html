@@ -10,12 +10,25 @@
     }
 
 
-    #player-container {
-      position: relative;
-      width: 999px;
-      height: 428px;
-      margin-bottom: 20px;
-    }
+#player-container {
+  position: relative;
+  width: 1280px;
+  aspect-ratio: 16 / 9;
+  background: black;
+
+
+}
+
+/* When page fullscreen */
+#player-container:fullscreen {
+  width: 100vw;
+  height: 100vh;
+}
+
+#player iframe {
+  width: 100% !important;
+  height: 100% !important;
+}
 
 .controls {
 width: 400px;
