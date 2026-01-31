@@ -19,7 +19,17 @@ function onYouTubeIframeAPIReady() {
     },
     events: {
       onReady: () => {
-        if (timeParam) {
+
+ // Auto mute
+    player.mute();
+
+// Request 720p
+    player.setPlaybackQuality('hd720');
+
+
+ // change timething    
+
+   if (timeParam) {
           const seconds = parseTime(timeParam);
           if (seconds !== null) {
             player.seekTo(seconds, true);
@@ -62,12 +72,18 @@ function extractVideoId(input) {
 }
 
 function changeVideo() {
-  const input = document.getElementById("urlInput").value.trim();
+  const input = document.getElementById('urlInput').value.trim();
   if (!input || !player) return;
 
   const videoId = extractVideoId(input);
+
   player.loadVideoById(videoId);
-  history.replaceState(null, "", `?v=${videoId}`);
+
+  // ✅ force mute again
+  player.mute();
+
+  // update URL without reload
+  history.replaceState(null, '', `?v=${videoId}`);
 }
 
 // ================= Fullscreen + rotate =================
