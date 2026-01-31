@@ -120,3 +120,27 @@ function togglePageFullscreen() {
 }
 
 ;
+let controlsTimer;
+
+function showSideControls() {
+  const controls = document.querySelectorAll('.side-controls');
+
+  controls.forEach(c => {
+    c.style.opacity = '1';
+    c.style.pointerEvents = 'auto';
+  });
+
+  clearTimeout(controlsTimer);
+
+  controlsTimer = setTimeout(() => {
+    controls.forEach(c => {
+      c.style.opacity = '0';
+      c.style.pointerEvents = 'none';
+    });
+  }, 2000);
+}
+const playerContainer = document.getElementById('player-container');
+
+['mousemove', 'touchstart', 'touchmove'].forEach(evt => {
+  playerContainer.addEventListener(evt, showSideControls, { passive: true });
+});
